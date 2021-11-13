@@ -10,7 +10,6 @@ public class Emprestimo {
     private Date momento;
     private EstadoEmprestimo status;
     private int id;
-
     private Usuario usuario;
     private List<Artefato> artefatos = new ArrayList<>();
 

@@ -9,15 +9,15 @@ public class Artefato {
     private EstadoArtefato status;
     private int id;
 
-    public Artefato() {
+    public Artefato(String titulo, String autor, String tipo, int idt) {
     }
 
     public Artefato(String name, String autor, String tipo, EstadoArtefato status, int id) {
         this.name = name;
         this.autor = autor;
         this.tipo = tipo;
-        this.status = status;
         this.id = id;
+        this.status = status;
     }
 
     public String getName() {
