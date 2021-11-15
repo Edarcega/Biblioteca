@@ -2,6 +2,8 @@ package entities;
 
 import enums.EstadoEmprestimo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,14 +15,12 @@ public class Emprestimo {
     private Usuario usuario;
     private List<Artefato> artefatos = new ArrayList<>();
 
-    public Emprestimo() {
-    }
-
-    public Emprestimo(Date momento, EstadoEmprestimo status, int id, Usuario usuario) {
+    public Emprestimo(Date momento, EstadoEmprestimo status, int id, Usuario usuario, List<Artefato> art) {
         this.momento = momento;
         this.status = status;
         this.id = id;
         this.usuario = usuario;
+        this.artefatos = art;
     }
 
     public Date getMomento() {
@@ -68,20 +68,22 @@ public class Emprestimo {
         artefatos.remove(artefato);
     }
 
-    public String resume() {
-        String resume = "nome: " + usuario.getNome() + "\n"
-                + " ID: " + usuario.getId() + "\n"
-                + "**** Emprestimo **** \n"
-                + concatArtefatos(artefatos);
-        return null;
+    public void resume() {
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.print("*****************************\n");
+        System.out.print("-- Resumo do emprestimo -- \n");
+        System.out.print("Data: " + sdf.format(momento) + "\n");
+        System.out.print("Nome: " + usuario.getNome() + "\n");
+        System.out.print("ID Usuário: " + usuario.getId() + "\n");
+        System.out.print("-- Lista de itens --\n");
+        int i = 1;
+        for (Artefato x : artefatos) {
+            System.out.print("Artefato #" + i + "\n");
+            System.out.print("- Título: " + x.getName() + "\n");
+            System.out.print("- Autor: " + x.getAutor() + "\n");
+            i++;
+        }
     }
 
-    public String concatArtefatos(List<Artefato> artefatos){
-        String listaArtefatos = null;
-        for (Artefato x:artefatos) {
-            listaArtefatos = listaArtefatos + x.getName() + "; \n";
-        }
-        return  listaArtefatos;
-    }
 
 }
