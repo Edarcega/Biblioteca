@@ -60,4 +60,3 @@ public class Artefato {
         this.id = id;
     }
 }
-

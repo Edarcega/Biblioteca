@@ -1,11 +1,10 @@
 package applications;
 
 import entities.Artefato;
-import entities.Emprestimo;
 import entities.Usuario;
-import enums.EstadoArtefato;
-import enums.EstadoEmprestimo;
-import enums.EstadoUsuario;
+import functions.CadastrarArtefato;
+import functions.CadastrarUsuario;
+import functions.Menu;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,27 +17,24 @@ public class Program {
     public static void main(String[] args) throws ParseException {
         Scanner sc = new Scanner(System.in);
         List<Artefato> art = new ArrayList<>();
-        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date();
+        List<Usuario> usuarios = new ArrayList<>();
+        List<Artefato> artefatos = new ArrayList<>();
 
+        switch (Menu.menu()) {
+            case 1:
+                usuarios = CadastrarUsuario.cadastrar();
+                break;
+            case 2:
+                artefatos = CadastrarArtefato.cadastrar();
+                break;
+        }
+        System.out.println("Concluído");
+
+        /*
         System.out.print("Quantos itens vai emprestar?");
-        int qtd = sc.nextInt();
-        sc.nextLine();
-        System.out.print("\n");
-
-        System.out.print(" --  Cadastre o usuário -- \n");
-        System.out.print("Nome: ");
-        String nome = sc.nextLine();
-        System.out.print("email: ");
-        String email = sc.nextLine();
-        System.out.print("telefone: ");
-        String telefone = sc.nextLine();
-        System.out.print("Nascimento: ");
-        Date nascimento = sdf1.parse(sc.nextLine());
-        System.out.print("ID: ");
-        int id = sc.nextInt();
-        Usuario usuario = new Usuario(nome, email, telefone, nascimento, id, EstadoUsuario.ATIVO);
-        sc.nextLine();
+        int qtd = sc.nextInt();public int menu ( ) {
 
         for (int i = 0; i < qtd; i++) {
             int atf = i + 1;
@@ -51,18 +47,20 @@ public class Program {
             String tipo = sc.nextLine();
             System.out.print("ID: ");
             int idt = sc.nextInt();
-            art.add(new Artefato(titulo, autor, tipo, EstadoArtefato.RESERVADO, idt));
+            art.add(new Acervo(titulo, autor, tipo, EstadoArtefato.RESERVADO, idt));
             sc.nextLine();
         }
 
         Emprestimo emprestimo = new Emprestimo(now, EstadoEmprestimo.EM_DIA, 1, usuario, art);
-
+        
         emprestimo.resume();
         System.out.print("Concluído");
 
         System.out.print("\n");
 
         sc.close();
+
+         */
     }
 
 }

@@ -13,14 +13,14 @@ public class Emprestimo {
     private EstadoEmprestimo status;
     private int id;
     private Usuario usuario;
-    private List<Artefato> artefatos = new ArrayList<>();
+    private List<Artefato> artefatoes = new ArrayList<>();
 
     public Emprestimo(Date momento, EstadoEmprestimo status, int id, Usuario usuario, List<Artefato> art) {
         this.momento = momento;
         this.status = status;
         this.id = id;
         this.usuario = usuario;
-        this.artefatos = art;
+        this.artefatoes = art;
     }
 
     public Date getMomento() {
@@ -56,16 +56,16 @@ public class Emprestimo {
     }
 
     public List<Artefato> getArtefatos() {
-        return artefatos;
+        return artefatoes;
     }
 
     public void addAtf(Artefato artefato) {
-        artefatos.add(artefato);
+        artefatoes.add(artefato);
 
     }
 
     public void removAtf(Artefato artefato) {
-        artefatos.remove(artefato);
+        artefatoes.remove(artefato);
     }
 
     public void resume() {
@@ -77,13 +77,13 @@ public class Emprestimo {
         System.out.print("ID Usuário: " + usuario.getId() + "\n");
         System.out.print("-- Lista de itens --\n");
         int i = 1;
-        for (Artefato x : artefatos) {
+
+        for (Artefato x : artefatoes) {
             System.out.print("Artefato #" + i + "\n");
             System.out.print("- Título: " + x.getName() + "\n");
             System.out.print("- Autor: " + x.getAutor() + "\n");
             i++;
         }
     }
-
 
 }
