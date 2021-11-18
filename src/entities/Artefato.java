@@ -3,7 +3,7 @@ package entities;
 import enums.EstadoArtefato;
 
 public class Artefato {
-    private String name;
+    private String titulo;
     private String autor;
     private String tipo;
     private EstadoArtefato status;
@@ -12,20 +12,20 @@ public class Artefato {
     public Artefato(String titulo, String autor, String tipo, int idt) {
     }
 
-    public Artefato(String name, String autor, String tipo, EstadoArtefato status, int id) {
-        this.name = name;
+    public Artefato(String titulo, String autor, String tipo, EstadoArtefato status, int id) {
+        this.titulo = titulo;
         this.autor = autor;
         this.tipo = tipo;
         this.id = id;
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getAutor() {

@@ -1,5 +1,6 @@
 package entities;
 
+import enums.EstadoArtefato;
 import enums.EstadoEmprestimo;
 
 import java.text.DateFormat;
@@ -7,20 +8,25 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Emprestimo {
     private Date momento;
     private EstadoEmprestimo status;
     private int id;
     private Usuario usuario;
-    private List<Artefato> artefatoes = new ArrayList<>();
+    private List<Artefato> artefatos = new ArrayList<>();
 
     public Emprestimo(Date momento, EstadoEmprestimo status, int id, Usuario usuario, List<Artefato> art) {
         this.momento = momento;
         this.status = status;
         this.id = id;
         this.usuario = usuario;
-        this.artefatoes = art;
+        this.artefatos = art;
+    }
+
+    public Emprestimo() {
+
     }
 
     public Date getMomento() {
@@ -56,16 +62,21 @@ public class Emprestimo {
     }
 
     public List<Artefato> getArtefatos() {
-        return artefatoes;
+        return artefatos;
     }
 
     public void addAtf(Artefato artefato) {
-        artefatoes.add(artefato);
+        artefatos.add(artefato);
 
     }
 
     public void removAtf(Artefato artefato) {
-        artefatoes.remove(artefato);
+        artefatos.remove(artefato);
+    }
+
+    public List<Artefato> artDisponiveis(List<Artefato> artefato) {
+        List<Artefato> result = artefato.stream().filter(x -> x.getStatus() == EstadoArtefato.DISPONIVEL).collect(Collectors.toList());
+        return result;
     }
 
     public void resume() {
@@ -78,9 +89,9 @@ public class Emprestimo {
         System.out.print("-- Lista de itens --\n");
         int i = 1;
 
-        for (Artefato x : artefatoes) {
+        for (Artefato x : artefatos) {
             System.out.print("Artefato #" + i + "\n");
-            System.out.print("- Título: " + x.getName() + "\n");
+            System.out.print("- Título: " + x.getTitulo() + "\n");
             System.out.print("- Autor: " + x.getAutor() + "\n");
             i++;
         }

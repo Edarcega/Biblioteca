@@ -22,11 +22,12 @@ public class CadastrarArtefato {
             String tipo = sc.nextLine();
             System.out.print("ID: ");
             int idt = sc.nextInt();
-            artefatos.add(new Artefato(titulo, autor, tipo, EstadoArtefato.RESERVADO, idt));
+            artefatos.add(new Artefato(titulo, autor, tipo, EstadoArtefato.DISPONIVEL, idt));
             sc.nextLine();
             System.out.println("Cadastrar novo artefato ?");
             System.out.println("1 - SIM | 2 - Não");
             i = sc.nextInt();
+            sc.nextLine();
         }
         return artefatos;
 

@@ -1,5 +1,5 @@
 package enums;
 
 public enum EstadoArtefato {
-    RESERVADO, EMPRESTADO, INDISPONIVEL;
+    RESERVADO, EMPRESTADO, INDISPONIVEL, DISPONIVEL;
 }

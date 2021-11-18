@@ -1,7 +1,9 @@
 package applications;
 
 import entities.Artefato;
+import entities.Emprestimo;
 import entities.Usuario;
+import enums.EstadoEmprestimo;
 import functions.CadastrarArtefato;
 import functions.CadastrarUsuario;
 import functions.Menu;
@@ -21,46 +23,62 @@ public class Program {
         Date now = new Date();
         List<Usuario> usuarios = new ArrayList<>();
         List<Artefato> artefatos = new ArrayList<>();
+        Emprestimo emprestimo = new Emprestimo();
+        int teste = 1;
 
-        switch (Menu.menu()) {
-            case 1:
-                usuarios = CadastrarUsuario.cadastrar();
-                break;
-            case 2:
-                artefatos = CadastrarArtefato.cadastrar();
-                break;
-        }
-        System.out.println("Concluído");
+        while (teste == 1) {
+            switch (Menu.menu()) {
+                case 1:
+                    usuarios = CadastrarUsuario.cadastrar();
+                    break;
+                case 2:
+                    artefatos = CadastrarArtefato.cadastrar();
+                    break;
+                case 3:
+                    if (usuarios.isEmpty() || artefatos.isEmpty()) {
+                        if (usuarios.isEmpty()) {
+                            System.out.println("Cadastro de usuários vazio!");
+                        }
+                        if (artefatos.isEmpty()) {
+                            System.out.println("Cadastro de artefatos vazio!");
+                        }
+                        break;
+                    }
 
-        /*
-        System.out.print("Quantos itens vai emprestar?");
-        int qtd = sc.nextInt();public int menu ( ) {
+                    System.out.println("Digite o ID do usuário");
+                    System.out.print("ID: ");
+                    int idu = sc.nextInt();
 
-        for (int i = 0; i < qtd; i++) {
-            int atf = i + 1;
-            System.out.print("-- Artefato #" + atf + ": \n");
-            System.out.print("Titulo: ");
-            String titulo = sc.nextLine();
-            System.out.print("Autor: ");
-            String autor = sc.nextLine();
-            System.out.print("Tipo:  ");
-            String tipo = sc.nextLine();
-            System.out.print("ID: ");
-            int idt = sc.nextInt();
-            art.add(new Acervo(titulo, autor, tipo, EstadoArtefato.RESERVADO, idt));
-            sc.nextLine();
-        }
+                    Usuario usr = usuarios.stream().filter(x -> x.getId() == idu).findFirst().orElse(null);
+                    System.out.println("Usuário: " + usr.getNome());
+                    System.out.print("\n");
+                    System.out.print("Quantos artefatos serão emprestados: ");
+                    int qtd = sc.nextInt();
+                    System.out.print("\n");
+                    for (int i = 0; i < qtd; i++) {
+                        int val = i + 1;
+                        System.out.println("-- Artefatos disponíveis --");
+                        List<Artefato> artDisp = emprestimo.artDisponiveis(artefatos);
+                        for (Artefato x : artDisp) {
+                            System.out.println("Titulo: " + x.getTitulo());
+                            System.out.println("ID: " + x.getId() + "\n");
+                        }
+                        emprestimo = new Emprestimo(now, EstadoEmprestimo.EM_DIA, 1, usr, artefatos);
 
-        Emprestimo emprestimo = new Emprestimo(now, EstadoEmprestimo.EM_DIA, 1, usuario, art);
-        
-        emprestimo.resume();
-        System.out.print("Concluído");
+                    }
 
-        System.out.print("\n");
 
-        sc.close();
+                    sc.nextLine();
+            }
 
-         */
+            System.out.println("1 - Continuar");
+            System.out.println("2 - Sair");
+            teste = sc.nextInt();
+        } // fim do enquanto
+
+        sc.nextLine();
+        System.out.println("Até logo");
+
     }
 
 }

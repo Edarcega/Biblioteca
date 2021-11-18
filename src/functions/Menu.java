@@ -11,6 +11,7 @@ public class Menu {
         System.out.println("2 - Cadastrar artefato");
         System.out.println("3 - Efetuar emprestimo");
         int esc = sc.nextInt();
+        sc.nextLine();
         return esc;
     }
 }
