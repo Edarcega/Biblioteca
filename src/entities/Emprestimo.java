@@ -79,7 +79,7 @@ public class Emprestimo {
         return result;
     }
 
-    public void resume() {
+    public void resume(List<Artefato> artefatos) {
         DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.print("*****************************\n");
         System.out.print("-- Resumo do emprestimo -- \n");
