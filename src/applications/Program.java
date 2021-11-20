@@ -67,17 +67,14 @@ public class Program {
 
                         art.add(temp);
                         temp.setStatus(EstadoArtefato.RESERVADO);
-
                     }
 
                     emprestimo = new Emprestimo(now, EstadoEmprestimo.EM_DIA, 1, usr, art);
 
                     emprestimo.resume(art);
 
-                    System.out.println();
+                    System.out.print("\n\n");
 
-                    sc.nextLine();
-                    break;
                 }
             }
 

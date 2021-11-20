@@ -3,9 +3,13 @@ package entities;
 import enums.EstadoArtefato;
 import enums.EstadoEmprestimo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,21 +84,45 @@ public class Emprestimo {
     }
 
     public void resume(List<Artefato> artefatos) {
+        StringBuilder resume = new StringBuilder();
         DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.print("*****************************\n");
-        System.out.print("-- Resumo do emprestimo -- \n");
-        System.out.print("Data: " + sdf.format(momento) + "\n");
-        System.out.print("Nome: " + usuario.getNome() + "\n");
-        System.out.print("ID Usuário: " + usuario.getId() + "\n");
-        System.out.print("-- Lista de itens --\n");
+        resume.append("*****************************\n");
+        resume.append("-- Resumo do emprestimo -- \n");
+        resume.append("Data: " + sdf.format(momento) + "\n");
+        resume.append("Nome: " + usuario.getNome() + "\n");
+        resume.append("ID Usuário: " + usuario.getId() + "\n\n");
+        resume.append("-- Lista de itens --\n");
+        System.out.print(resume.toString() + "\n");
         int i = 1;
 
         for (Artefato x : artefatos) {
+            Date devolucao = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(this.momento);
+            cal.add(Calendar.DATE,15);
+            devolucao = cal.getTime();
             System.out.print("Artefato #" + i + "\n");
+            resume.append("Artefato #" + i + "\n");
             System.out.print("- Título: " + x.getTitulo() + "\n");
+            resume.append("- Título: " + x.getTitulo() + "\n");
             System.out.print("- Autor: " + x.getAutor() + "\n");
+            resume.append("- Autor: " + x.getAutor() + "\n");
+            System.out.print("- Data de devolução: " + sdf.format(devolucao));
+            resume.append("- Data de devolução: " + sdf.format(devolucao));
+            String gravar = resume.toString();
+            String path = "/home/edimar/Documentos/resumeEmprestimo";
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
+                bw.write(gravar);
+                bw.newLine();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+
             i++;
         }
+
     }
 
 }
