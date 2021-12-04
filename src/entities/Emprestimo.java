@@ -93,13 +93,13 @@ public class Emprestimo {
         resume.append("ID Usuário: " + usuario.getId() + "\n\n");
         resume.append("-- Lista de itens --\n");
         System.out.print(resume.toString() + "\n");
+        Date devolucao = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.momento);
         int i = 1;
 
         for (Artefato x : artefatos) {
-            Date devolucao = new Date();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(this.momento);
-            cal.add(Calendar.DATE,15);
+            cal.add(Calendar.DATE, 15);
             devolucao = cal.getTime();
             System.out.print("Artefato #" + i + "\n");
             resume.append("Artefato #" + i + "\n");
@@ -107,20 +107,22 @@ public class Emprestimo {
             resume.append("- Título: " + x.getTitulo() + "\n");
             System.out.print("- Autor: " + x.getAutor() + "\n");
             resume.append("- Autor: " + x.getAutor() + "\n");
-            System.out.print("- Data de devolução: " + sdf.format(devolucao));
-            resume.append("- Data de devolução: " + sdf.format(devolucao));
+            System.out.print("- Data de devolução: " + sdf.format(devolucao) + "\n");
+            resume.append("- Data de devolução: " + sdf.format(devolucao) + "\n");
+            System.out.print("\n");
+            resume.append("\n");
             String gravar = resume.toString();
-            String path = "/home/edimar/Documentos/resumeEmprestimo";
+            String path = "/home/edimar/Documentos/Biblioteca/resumeEmprestimo";
+            i++;
 
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
                 bw.write(gravar);
                 bw.newLine();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            i++;
+
         }
 
     }

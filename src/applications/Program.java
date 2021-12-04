@@ -28,8 +28,25 @@ public class Program {
 
         while (teste == 1) {
             switch (Menu.menu()) {
-                case 1 -> usuarios = CadastrarUsuario.cadastrar();
-                case 2 -> artefatos = CadastrarArtefato.cadastrar();
+                case 1 -> {
+                    System.out.println("1 - Digitar | 2 - Importar de CSV");
+                    int cad = sc.nextInt();
+
+                    switch (cad) {
+                        case 1 -> usuarios = CadastrarUsuario.cadastrar();
+                        case 2 -> usuarios = CadastrarUsuario.importarCadastro();
+                    }
+                    break;
+                }
+                case 2 -> {
+                    System.out.println("1 - Digitar | 2 - Importar de CSV");
+                    int cad = sc.nextInt();
+                    switch (cad) {
+                        case 1 -> artefatos = CadastrarArtefato.cadastrar();
+                        case 2 -> artefatos = CadastrarArtefato.importarCadastro();
+                    }
+                    break;
+                }
                 case 3 -> {
                     if (usuarios.isEmpty() || artefatos.isEmpty()) {
                         if (usuarios.isEmpty()) {

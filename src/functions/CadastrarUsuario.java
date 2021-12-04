@@ -3,6 +3,9 @@ package functions;
 import entities.Usuario;
 import enums.EstadoUsuario;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,10 +33,8 @@ public class CadastrarUsuario {
             String telefone = sc.nextLine();
             System.out.print("Nascimento: ");
             Date nascimento = sdf1.parse(sc.nextLine());
-            System.out.print("ID: ");
-            int id = sc.nextInt();
+            int id = usuarios.size() + 1;
             usuarios.add(new Usuario(nome, email, telefone, nascimento, id, EstadoUsuario.ATIVO));
-            sc.nextLine();
             System.out.println("Cadartrar novo Usuário ?");
             System.out.println("1 - SIM | 2 - NÃO");
             i = sc.nextInt();
@@ -41,7 +42,26 @@ public class CadastrarUsuario {
             sc.nextLine();
         }
 
+
         return usuarios;
     }
 
+
+    public static List<Usuario> importarCadastro() {
+        String path = "/home/edimar/Documentos/Biblioteca/importarUsuarios.txt";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String listaUsuarios = br.readLine();
+            while (listaUsuarios != null) {
+                String[] fields = listaUsuarios.split(",");
+                int id = usuarios.size() + 1;
+                Date nascimento = sdf1.parse(fields[3]);
+                usuarios.add(new Usuario(fields[0], fields[1], fields[2], nascimento, id, EstadoUsuario.ATIVO));
+                listaUsuarios = br.readLine();
+            }
+        } catch (IOException | ParseException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+        return  usuarios;
+    }
 }
